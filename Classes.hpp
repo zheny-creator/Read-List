@@ -15,4 +15,5 @@ private:
     int year;
 
 public:
+    Book(const string &name, const string &author, const string &genre, int year) : name(name), author(author), genre(genre), year(year) {}
 };
