@@ -1,11 +1,11 @@
-#include "Classes.hpp"
+#include "Classes.hpp" // Здесь лежат классы
 
 int main()
 {
-    int choice;
-    string name, name_list, author, genre;
-    int year;
-    while (true)
+    int choice;                            // Переменная для выбора действия
+    string name, name_list, author, genre; // Переменные для хранения данных
+    int year;                              // Переменная для хранения года издания
+    while (true)                           // Бесконечный цикл
     {
         cout << "\n=== Меню ===\n";
         cout << "1: Создать список книг\n";
@@ -14,9 +14,9 @@ int main()
         cout << "4: Выйти\n";
         cout << "5: О программе\n";
         cout << "Введите номер действия: ";
-        cin >> choice;
+        cin >> choice; // Ввод выбора действия
 
-        if (choice == 1)
+        if (choice == 1) // Если выбрано создание списка книг
         {
             cout << "Введите название списка: ";
             getline(cin, name_list);
@@ -35,22 +35,22 @@ int main()
             cout << "В разработке!" << endl;
             continue;
         }
-        else if (choice == 2)
+        else if (choice == 2) // Если выбрано добавление книги в существующий список
         {
             cout << "В разработке!" << endl;
             continue;
         }
-        else if (choice == 3)
+        else if (choice == 3) // Если выбрано изменение книги в списке
         {
             cout << "В разработке!" << endl;
             continue;
         }
-        else if (choice == 4)
+        else if (choice == 4) // Если выбран выход
         {
             cout << "Выход из программы..." << endl;
             break;
         }
-        else if (choice == 5)
+        else if (choice == 5) // Если выбрана программа
         {
             cout << "Программа для работы с книгами." << endl;
             cout << "Автор: Женя Бородин" << endl;
