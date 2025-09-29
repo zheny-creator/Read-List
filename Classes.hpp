@@ -5,3 +5,14 @@
 #pragma once
 
 using namespace std;
+
+class Book
+{
+private:
+    string name;
+    string author;
+    string genre;
+    int year;
+
+public:
+};
