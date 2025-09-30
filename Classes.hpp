@@ -9,12 +9,12 @@ using namespace std;
 using json = nlohmann::json;
 class Book
 {
-protected:         // Поля доступны внутри класса и в наследниках
-    string name;   // Имя книги
-    string author; // Автор книги
-    string genre;  // Жанр книги
-    string name_list;
-    int year; // Год издания книги
+protected:            // Поля доступны внутри класса и в наследниках
+    string name;      // Имя книги
+    string author;    // Автор книги
+    string genre;     // Жанр книги
+    string name_list; // Название списка книг
+    int year;         // Год издания книги
 
 public:
     // Конструктор
@@ -31,5 +31,23 @@ public:
         ofstream file(name_list + ".json"); // Создаем файл .json в режиме записи
         file << j1.dump(4);                 // превращаем json объекты в строку
         file.close();
+    }
+    void add_book_to_list(const string &name_list, const string &name, const string &author, const string &genre, int year)
+    {
+        json j1;
+        j1["name"] = name;
+        j1["year"] = year;
+        j1["author"] = author;
+        j1["genre"] = genre;
+        ofstream file(name_list + ".json", ios::app); // Создаем файл .json в режиме записи
+        if (file.is_open())
+        {
+            file << j1.dump(4); // превращаем json объекты в строку
+            file.close();
+        }
+        else if (file.fail())
+        {
+            cout << "Ошибка при открытии файла" << endl;
+        }
     }
 };

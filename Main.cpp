@@ -44,7 +44,27 @@ int main()
         }
         else if (choice == 2) // Если выбрано добавление книги в существующий список
         {
-            cout << "В разработке!" << endl;
+            cout << "Введите название списка: ";
+            getline(cin, name_list);
+            cout << "Введите название книги: ";
+            getline(cin, name);
+            cout << "Введите автора: ";
+            getline(cin, author);
+            cout << "Введите жанр: ";
+            getline(cin, genre);
+            cout << "Введите год издания: ";
+            cin >> year;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Ошибка ввода! Введите число.\n";
+                continue;
+            }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            Book book1(name, author, genre, name_list, year);
+            book1.add_book_to_list(name_list, name, author, genre, year);
+            cout << "Список обновлен!\n";
             continue;
         }
         else if (choice == 3) // Если выбрано изменение книги в списке
