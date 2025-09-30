@@ -1,15 +1,17 @@
-#include <iostream> // Для ввода/вывода (cout, cin)
-#include <vector>   // Для работы с динамическими массивами
-#include <string>   // Для работы со строками
-#include <fstream>  // Для работы с файлами
-#include "json.hpp" // Для работы с JSON
-#pragma once        // Для того, чтобы компилятор не включал этот файл дважды
+#include <iostream>   // Для ввода/вывода (cout, cin)
+#include <vector>     // Для работы с динамическими массивами
+#include <string>     // Для работы со строками
+#include <fstream>    // Для работы с файлами
+#include <filesystem> // Для работы с файловой системой
+#include "json.hpp"   // Для работы с JSON
+#pragma once          // Для того, чтобы компилятор не включал этот файл дважды
 
 using namespace std;
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 class Book
 {
-protected:            // Поля доступны внутри класса и в наследниках
+private:              // Поля доступны внутри класса и в наследниках
     string name;      // Имя книги
     string author;    // Автор книги
     string genre;     // Жанр книги
@@ -49,5 +51,20 @@ public:
         {
             cout << "Ошибка при открытии файла" << endl;
         }
+    }
+};
+
+class List
+{
+private:
+    string new_name_list;
+    string old_name_list;
+
+public:
+    List(const string &new_name_list, const string &old_name_list) : new_name_list(new_name_list), old_name_list(old_name_list) {}
+
+    void change_name_list(const string &new_name_list, const string &old_name_list)
+    {
+        fs::rename(new_name_list + ".json", old_name_list + ".json");
     }
 };

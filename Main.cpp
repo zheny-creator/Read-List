@@ -2,10 +2,10 @@
 
 int main()
 {
-    int choice;                            // Переменная для выбора действия
-    string name, author, genre, name_list; // Переменные для хранения данных
-    int year;                              // Переменная для хранения года издания
-    while (true)                           // Бесконечный цикл
+    int choice;                                                          // Переменная для выбора действия
+    string name, author, genre, name_list, new_name_list, old_name_list; // Переменные для хранения данных
+    int year;                                                            // Переменная для хранения года издания
+    while (true)                                                         // Бесконечный цикл
     {
         cout << "\n=== Меню ===\n";
         cout << "1: Создать список книг\n";
@@ -87,7 +87,13 @@ int main()
         }
         else if (choice == 6) // Если выбрано изменение названия списка
         {
-            cout << "В разработке!" << endl;
+            cout << "Введите старое название списка: ";
+            getline(cin, old_name_list);
+            cout << "Введите новое название списка: ";
+            getline(cin, new_name_list);
+            List list1(old_name_list, new_name_list);
+            list1.change_name_list(old_name_list, new_name_list);
+            cout << "Название списка изменено!\n";
             continue;
         }
     }
