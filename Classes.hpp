@@ -24,6 +24,6 @@ public:
     void add_book(const string &name, const string &author, const string &genre, int year)
     {
         unordered_map<string, Book> books;
-        books[name] = Book(name, author, genre, year);
+        books.emplace(name, Book(name, author, genre, year));
     }
 };
