@@ -1,10 +1,9 @@
-#include <iostream>      // Для ввода/вывода (cout, cin)
-#include <vector>        // Для работы с динамическими массивами
-#include <string>        // Для работы со строками
-#include <unordered_map> // Для работы с ассоциативными массивами
-#include <fstream>       // Для работы с файлами
-#include "json.hpp"      // Для работы с JSON
-#pragma once             // Для того, чтобы компилятор не включал этот файл дважды
+#include <iostream> // Для ввода/вывода (cout, cin)
+#include <vector>   // Для работы с динамическими массивами
+#include <string>   // Для работы со строками
+#include <fstream>  // Для работы с файлами
+#include "json.hpp" // Для работы с JSON
+#pragma once        // Для того, чтобы компилятор не включал этот файл дважды
 
 using namespace std;
 using json = nlohmann::json;
@@ -20,10 +19,16 @@ public:
     // Конструктор
     Book(const string &name, const string &author, const string &genre, int year) : name(name), author(author), genre(genre), year(year) {}
 
-    // Добавление книги в словарь
+    // Добавление книги в список
     void add_book(const string &name, const string &author, const string &genre, int year)
     {
-        unordered_map<string, Book> books;
-        books.emplace(name, Book(name, author, genre, year));
+        json j1;
+        j1["name"] = name;
+        j1["year"] = year;
+        j1["author"] = author;
+        j1["genre"] = genre;
+        ofstream file("Книги.json"); // Создаем файл Книги.json в режиме записи
+        file << j1.dump(4);          // превращаем json объекты в строку
+        file.close();
     }
 };

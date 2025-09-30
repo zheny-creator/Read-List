@@ -2,10 +2,10 @@
 
 int main()
 {
-    int choice;                            // Переменная для выбора действия
-    string name, name_list, author, genre; // Переменные для хранения данных
-    int year;                              // Переменная для хранения года издания
-    while (true)                           // Бесконечный цикл
+    int choice;                 // Переменная для выбора действия
+    string name, author, genre; // Переменные для хранения данных
+    int year;                   // Переменная для хранения года издания
+    while (true)                // Бесконечный цикл
     {
         cout << "\n=== Меню ===\n";
         cout << "1: Создать список книг\n";
@@ -15,24 +15,22 @@ int main()
         cout << "5: О программе\n";
         cout << "Введите номер действия: ";
         cin >> choice; // Ввод выбора действия
+        cin.ignore();  // Очистка буфера ввода
 
         if (choice == 1) // Если выбрано создание списка книг
         {
-            cout << "Введите название списка: ";
-            getline(cin, name_list);
-            cin.ignore();
             cout << "Введите название книги: ";
             getline(cin, name);
-            cin.ignore();
             cout << "Введите автора: ";
             getline(cin, author);
-            cin.ignore();
             cout << "Введите жанр: ";
-            cin >> genre;
+            getline(cin, genre);
             cout << "Введите год издания: ";
             cin >> year;
-
-            cout << "В разработке!" << endl;
+            cin.ignore();
+            Book book1(name, author, genre, year);
+            book1.add_book(name, author, genre, year);
+            cout << "Список создан!\n";
             continue;
         }
         else if (choice == 2) // Если выбрано добавление книги в существующий список
@@ -59,4 +57,8 @@ int main()
         }
     }
     return 0;
+}
+void NewFunction()
+{
+    cin.ignore();
 }
