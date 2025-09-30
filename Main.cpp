@@ -81,7 +81,7 @@ int main()
         {
             cout << "Программа для работы с книгами." << endl;
             cout << "Автор: Женя Бородин" << endl;
-            cout << "Версия: 1.0 Milestone 1" << endl;
+            cout << "Версия: 1.0 Milestone 2" << endl;
             continue;
         }
     }
