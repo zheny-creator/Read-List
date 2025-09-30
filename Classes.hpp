@@ -28,7 +28,7 @@ public:
         j1["year"] = year;
         j1["author"] = author;
         j1["genre"] = genre;
-        ofstream file(name_list + ".json"); // Создаем файл Книги.json в режиме записи
+        ofstream file(name_list + ".json"); // Создаем файл .json в режиме записи
         file << j1.dump(4);                 // превращаем json объекты в строку
         file.close();
     }
