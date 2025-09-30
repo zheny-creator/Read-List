@@ -2,10 +2,10 @@
 
 int main()
 {
-    int choice;                 // Переменная для выбора действия
-    string name, author, genre; // Переменные для хранения данных
-    int year;                   // Переменная для хранения года издания
-    while (true)                // Бесконечный цикл
+    int choice;                            // Переменная для выбора действия
+    string name, author, genre, name_list; // Переменные для хранения данных
+    int year;                              // Переменная для хранения года издания
+    while (true)                           // Бесконечный цикл
     {
         cout << "\n=== Меню ===\n";
         cout << "1: Создать список книг\n";
@@ -19,6 +19,8 @@ int main()
 
         if (choice == 1) // Если выбрано создание списка книг
         {
+            cout << "Введите название списка: ";
+            getline(cin, name_list);
             cout << "Введите название книги: ";
             getline(cin, name);
             cout << "Введите автора: ";
@@ -35,8 +37,8 @@ int main()
                 continue;
             }
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            Book book1(name, author, genre, year);
-            book1.add_book(name, author, genre, year);
+            Book book1(name, author, genre, name_list, year);
+            book1.add_book(name, author, genre, name_list, year);
             cout << "Список создан!\n";
             continue;
         }

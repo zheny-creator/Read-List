@@ -13,22 +13,23 @@ protected:         // Поля доступны внутри класса и в 
     string name;   // Имя книги
     string author; // Автор книги
     string genre;  // Жанр книги
-    int year;      // Год издания книги
+    string name_list;
+    int year; // Год издания книги
 
 public:
     // Конструктор
-    Book(const string &name, const string &author, const string &genre, int year) : name(name), author(author), genre(genre), year(year) {}
+    Book(const string &name, const string &author, const string &genre, const string &name_list, int year) : name(name), author(author), genre(genre), year(year) {}
 
     // Добавление книги в список
-    void add_book(const string &name, const string &author, const string &genre, int year)
+    void add_book(const string &name, const string &author, const string &genre, const string &name_list, int year)
     {
         json j1;
         j1["name"] = name;
         j1["year"] = year;
         j1["author"] = author;
         j1["genre"] = genre;
-        ofstream file("Книги.json"); // Создаем файл Книги.json в режиме записи
-        file << j1.dump(4);          // превращаем json объекты в строку
+        ofstream file(name_list + ".json"); // Создаем файл Книги.json в режиме записи
+        file << j1.dump(4);                 // превращаем json объекты в строку
         file.close();
     }
 };
