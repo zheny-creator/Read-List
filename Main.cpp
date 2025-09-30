@@ -27,7 +27,14 @@ int main()
             getline(cin, genre);
             cout << "Введите год издания: ";
             cin >> year;
-            cin.ignore();
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Ошибка ввода! Введите число.\n";
+                continue;
+            }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             Book book1(name, author, genre, year);
             book1.add_book(name, author, genre, year);
             cout << "Список создан!\n";
