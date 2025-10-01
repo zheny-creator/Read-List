@@ -25,22 +25,26 @@ public:
     // Добавление книги в список
     void add_book(const string &name, const string &author, const string &genre, const string &name_list, int year)
     {
-        json j1;
-        j1["name"] = name;
-        j1["year"] = year;
-        j1["author"] = author;
-        j1["genre"] = genre;
+        json j1 = json::array();
+        json book1;
+        book1["name"] = name;
+        book1["year"] = year;
+        book1["author"] = author;
+        book1["genre"] = genre;
+        j1.push_back(book1);
         ofstream file(name_list + ".json"); // Создаем файл .json в режиме записи
         file << j1.dump(4);                 // превращаем json объекты в строку
         file.close();
     }
     void add_book_to_list(const string &name_list, const string &name, const string &author, const string &genre, int year)
     {
-        json j1;
-        j1["name"] = name;
-        j1["year"] = year;
-        j1["author"] = author;
-        j1["genre"] = genre;
+        json j1 = json::array();
+        json book1;
+        book1["name"] = name;
+        book1["year"] = year;
+        book1["author"] = author;
+        book1["genre"] = genre;
+        j1.push_back(book1);
         ofstream file(name_list + ".json", ios::app); // Создаем файл .json в режиме записи
         if (file.is_open())
         {
