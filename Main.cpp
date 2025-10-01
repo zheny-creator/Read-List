@@ -22,12 +22,32 @@ int main()
         {
             cout << "Введите название списка: ";
             getline(cin, name_list);
+            if (name_list.empty())
+            {
+                cout << "Название списка не может быть пустым!\n";
+                continue;
+            } // Если название списка пустое
             cout << "Введите название книги: ";
             getline(cin, name);
+            if (name.empty())
+            {
+                cout << "Название книги не может быть пустым!\n";
+                continue;
+            }
             cout << "Введите автора: ";
             getline(cin, author);
+            if (author.empty())
+            {
+                cout << "Автор не может быть пустым!\n";
+                continue;
+            } // Если автор не указан
             cout << "Введите жанр: ";
             getline(cin, genre);
+            if (genre.empty())
+            {
+                cout << "Жанр не может быть пустым!\n";
+                continue;
+            } // Если жанр не указан
             cout << "Введите год издания: ";
             cin >> year;
             if (cin.fail())
