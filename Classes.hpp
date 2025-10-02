@@ -40,7 +40,14 @@ public:
     }
     void add_book_to_list(const int &id, const string &name_list, const string &name, const string &author, const string &genre, int year)
     {
-        json j1 = json::array();
+        ifstream file(name_list + ".json"); // Открываем файл для чтения
+        json j1;
+        if (file.is_open())
+        {
+            file >> j1;
+            file.close();
+        } // Если файл открыт успешно
+
         json book1;
         book1["id"] = id,
         book1["name"] = name;
@@ -48,15 +55,13 @@ public:
         book1["author"] = author;
         book1["genre"] = genre;
         j1.push_back(book1);
-        ofstream file(name_list + ".json", ios::app); // Создаем файл .json в режиме записи
-        if (file.is_open())
+        ofstream out(name_list + ".json"); // Создаем файл .json в режиме записи
+        if (out.is_open())
         {
-            file << "\n"
-                 << "\n";
-            file << j1.dump(4); // превращаем json объекты в строку
+            out << j1.dump(4); // превращаем json объекты в строку
             file.close();
         }
-        else if (file.fail())
+        else if (out.fail())
         {
             cout << "Ошибка при открытии файла" << endl;
         }
