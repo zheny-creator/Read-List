@@ -7,9 +7,9 @@ Read-List — программа для создания списков книг
 ```Shell
 g++ Main.cpp
 ```
---
 
-# Вклад
+
+## Вклад
 Приветствую Pull Requests и Issues!
 Если вы нашли баг или хотите предложить улучшение — создайте issue или сделайте pull request. Ваш вклад поможет сделать проект лучше.
 
@@ -19,11 +19,11 @@ g++ Main.cpp
 
 Read-List is an open-source program for creating book lists, written in C++.
 
-# Build
+## Build
 ```shell
 g++ Main.cpp
 ```
---
-# Contributing
+
+## Contributing
 Pull Requests and Issues are welcome!
 If you found a bug or want to suggest an improvement, please open an issue or create a pull request. Your contribution helps make the project better.
