@@ -2,10 +2,11 @@
 
 int main()
 {
-    int choice;                                                          // Переменная для выбора действия
-    string name, author, genre, name_list, new_name_list, old_name_list; // Переменные для хранения данных
-    int year;                                                            // Переменная для хранения года издания
-    while (true)                                                         // Бесконечный цикл
+    int choice;                                                                              // Переменная для выбора действия
+    string name, author, genre, name_list, new_name_list, new_data, old_data, old_name_list; // Переменные для хранения данных
+    int year,
+        id;      // Переменная для хранения года издания
+    while (true) // Бесконечный цикл
     {
         cout << "\n=== Меню ===\n";
         cout << "1: Создать список книг\n";
@@ -20,6 +21,16 @@ int main()
 
         if (choice == 1) // Если выбрано создание списка книг
         {
+            cout << "Введите id: ";
+            cin >> id;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Ошибка ввода! Введите число.\n";
+                continue;
+            }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Введите название списка: ";
             getline(cin, name_list);
             if (name_list.empty())
@@ -58,8 +69,8 @@ int main()
                 continue;
             }
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            Book book1(name, author, genre, name_list, year);
-            book1.add_book(name, author, genre, name_list, year);
+            Book book1(id, name, author, genre, name_list, year);
+            book1.add_book(id, name, author, genre, name_list, year);
             cout << "Список создан!\n";
             continue;
         }
@@ -67,12 +78,43 @@ int main()
         {
             cout << "Введите название списка: ";
             getline(cin, name_list);
+            if (name_list.empty())
+            {
+                cout << "Название списка не может быть пустым!\n";
+                continue;
+            }
+
+            cout << "Введите id: ";
+            cin >> id;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Ошибка ввода! Введите число.\n";
+                continue;
+            }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Введите название книги: ";
             getline(cin, name);
+            if (name.empty())
+            {
+                cout << "Название книги не может быть пустым!\n";
+                continue;
+            }
             cout << "Введите автора: ";
             getline(cin, author);
+            if (author.empty())
+            {
+                cout << "Автор не может быть пустым!\n";
+                continue;
+            }
             cout << "Введите жанр: ";
             getline(cin, genre);
+            if (genre.empty())
+            {
+                cout << "Жанр не может быть пустым!\n";
+                continue;
+            }
             cout << "Введите год издания: ";
             cin >> year;
             if (cin.fail())
@@ -83,14 +125,37 @@ int main()
                 continue;
             }
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            Book book1(name, author, genre, name_list, year);
-            book1.add_book_to_list(name_list, name, author, genre, year);
+            Book book1(id, name, author, genre, name_list, year);
+            book1.add_book_to_list(id, name_list, name, author, genre, year);
             cout << "Список обновлен!\n";
             continue;
         }
         else if (choice == 3) // Если выбрано изменение книги в списке
         {
-            cout << "В разработке!" << endl;
+            cout << "Введите название списка: ";
+            getline(cin, name_list);
+            if (name_list.empty())
+            {
+                cout << "Название списка не может быть пустым!\n";
+            }
+            cout << "Введите id книги: ";
+            cin >> id;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Ошибка ввода! Введите число.\n";
+                continue;
+            }
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Введите название того, что хотите изменить (пример на английском: name, genre, year, author) ";
+            getline(cin, name);
+            cout << "Введите новое значение: ";
+            getline(cin, new_data);
+            cout << "Введите старое значение: ";
+            getline(cin, old_data);
+            New_data data1(name, name_list, old_data, new_data, id);
+            data1.change_data(name, name_list, old_data, new_data, id);
             continue;
         }
         else if (choice == 4) // Если выбран выход

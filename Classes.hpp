@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 class Book
 {
 private:              // Поля доступны внутри класса и в наследниках
+    int id;           // Идентификатор книги
     string name;      // Имя книги
     string author;    // Автор книги
     string genre;     // Жанр книги
@@ -20,13 +21,14 @@ private:              // Поля доступны внутри класса и 
 
 public:
     // Конструктор
-    Book(const string &name, const string &author, const string &genre, const string &name_list, int year) : name(name), author(author), genre(genre), year(year) {}
+    Book(const int &id, const string &name, const string &author, const string &genre, const string &name_list, int year) : id(id), name(name), author(author), genre(genre), year(year) {}
 
     // Добавление книги в список
-    void add_book(const string &name, const string &author, const string &genre, const string &name_list, int year)
+    void add_book(const int &id, const string &name, const string &author, const string &genre, const string &name_list, int year)
     {
         json j1 = json::array();
         json book1;
+        book1["id"] = id,
         book1["name"] = name;
         book1["year"] = year;
         book1["author"] = author;
@@ -36,10 +38,11 @@ public:
         file << j1.dump(4);                 // превращаем json объекты в строку
         file.close();
     }
-    void add_book_to_list(const string &name_list, const string &name, const string &author, const string &genre, int year)
+    void add_book_to_list(const int &id, const string &name_list, const string &name, const string &author, const string &genre, int year)
     {
         json j1 = json::array();
         json book1;
+        book1["id"] = id,
         book1["name"] = name;
         book1["year"] = year;
         book1["author"] = author;
@@ -48,6 +51,8 @@ public:
         ofstream file(name_list + ".json", ios::app); // Создаем файл .json в режиме записи
         if (file.is_open())
         {
+            file << "\n"
+                 << "\n";
             file << j1.dump(4); // превращаем json объекты в строку
             file.close();
         }
@@ -71,4 +76,41 @@ public:
     {
         fs::rename(new_name_list + ".json", old_name_list + ".json");
     }
+};
+class New_data // Класс для работы с данными
+{
+private:
+    string name;
+    string old_name;
+    string new_name;
+    string name_json;
+    int target_id;
+
+public:
+    New_data(const string &name, const string &name_json, const string &old_name, const string &new_name, const int &target_id) : name(name), old_name(old_name), new_name(new_name), target_id(target_id) {}
+
+    void change_data(const string &name, const string &name_json, const string &old_name, const string &new_name, const int &target_id)
+    {
+        ifstream file(name_json + ".json"); // Открываем файл для чтения
+        json j;
+        if (file.is_open())
+        {
+            file >> j; // Считываем данные из файла в объект json
+            file.close();
+        }
+        else
+        {
+            cout << "Ошибка при открытии файла" << endl;
+        }
+        for (auto &book : j)
+        {
+            if (book["id"] == target_id)
+            {
+                book[name] = new_name;
+                ofstream file(name_json + ".json"); // Открываем файл для записи
+                file << j.dump(4);                  // Преобразуем объект json в строку и записываем в файл
+                file.close();
+            }
+        }
+    };
 };
